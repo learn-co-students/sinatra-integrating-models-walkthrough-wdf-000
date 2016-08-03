@@ -10,18 +10,20 @@ class TextAnalyzer
   end
   
   def count_of_vowels
-    text.scan(/[aAeEiIuUoO]/).size
+    text.downcase.scan(/[aeiuo]/).size
   end
 
   def count_of_consonants
-    text.gsub!(/[aAeEiIuUoO ]/, "").length 
+    text.downcase.gsub!(/[aeiuo ]/, "").length 
   end
 
   def most_used_letter
-    @arr = text.gsub(/[ ]/, "").split("").sort
-    arr.max_by { |i| arr.count(i) }
+    arr = text.downcase.gsub(/[ ]/, "").split("")
+    arr.max_by { |i| arr.count(i) }.upcase
   end
+
   def occurence
-    @arr.count(@most_common_letter)
+    arr = text.downcase.gsub(/[ ]/, "").split("")
+    arr.count(most_used_letter.downcase)
   end
 end
